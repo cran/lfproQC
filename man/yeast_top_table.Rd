@@ -5,7 +5,7 @@
 \alias{yeast_top_table}
 \title{Top table for Yeast Lysate - UPS1 dataset}
 \format{
-A data frame with 954 rows and 6 variables along with 'Fasta headers':
+A data frame with 835 rows and 6 variables along with 'Fasta headers':
 \describe{
   \item{logFC}{Log fold change values}
   \item{AveExpr}{Average intensity values}

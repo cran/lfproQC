@@ -5,7 +5,7 @@
 \alias{knn_rlr_yeast_data}
 \title{Normalized and imputed complete yeast lysate - UPS1 benchmark dataset}
 \format{
-A data frame with 954 rows and 6 variables:
+A data frame with 835 rows and 7 variables:
 \describe{
   \item{Majority protein IDs}{Protein ID information}
   \item{A1}{1st sample group, 1st technical replicate}

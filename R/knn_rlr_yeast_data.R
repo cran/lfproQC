@@ -3,7 +3,7 @@
 #' This is the groupwise normalized and missing values imputed dataset of the complete yeast lysate - UPS1 benchmark dataset. 
 #' Normalization has been done by RLR normalization method and missing values imputation has been done by KNN imputation method.
 #'
-#' @format A data frame with 954 rows and 6 variables:
+#' @format A data frame with 835 rows and 7 variables:
 #' \describe{
 #'   \item{Majority protein IDs}{Protein ID information}
 #'   \item{A1}{1st sample group, 1st technical replicate}

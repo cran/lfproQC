@@ -134,3 +134,7 @@ library(knitr)
 knitr::include_graphics("images/flow1.jpg")
 ```
 
+**Session Information**
+```{r}
+sessionInfo()
+```

@@ -1,0 +1,9 @@
+# NEWS for lfproQC
+
+# lfproQC 0.2.0
+
+## Improvements
+* Modified the 'best_combination()' function to accept proteomics data that contains an unequal number of sample replications.
+
+# lfproQC 0.1.0
+* First release of the package.

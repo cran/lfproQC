@@ -87,43 +87,58 @@ best_combination <- function (data_input, groups){
 
   Type <- Group <- name <- value <- . <- value_Mean <- median <-
     value_Median <- sd <- value_SD <- PCV_mean <- PCV_median <- PCV_sd <-
-    PEV_mean <- PEV_median <- PEV_sd <- PMAD_mean <- PMAD_median <- PMAD_sd <-NULL
+    PEV_mean <- PEV_median <- PEV_sd <- PMAD_mean <- PMAD_median <- PMAD_sd <-
+    rowid <- original_order <- group <- mass <- all_na <- NULL
   
   #Converting all zeros to NAs
   data_input[data_input == 0] <- NA
-  
-  #Complete data function (To remove complete missing values in the group)
-  complete_data_fn <- function (data, groups){
-    
-    rowid <- id <- group <- mass <- n <- name <- NULL
-    
-    #Rename the groups data
-    new_colnames <- c("name", "group")
-    colnames(groups)<-new_colnames
-    
-    #Rename the first column of data_input
-    data_input1 <- data
-    colnames(data_input1)[1] <- "rowid"
-    
-    #Removing groupwise missing rows in a dataframe
-    com_data <- data_input1 %>%
-      dplyr::group_by(rowid) %>%
-      dplyr::mutate(id = dplyr::row_number()) %>%
-      dplyr::ungroup() %>%
-      tidyr::pivot_longer(-c(rowid, id), values_to = "mass") %>%
-      dplyr::inner_join(groups, by = "name") %>%
-      dplyr::add_count(rowid, id, group, wt = !is.na(mass)) %>%
-      dplyr::group_by(rowid, id) %>%
-      dplyr::filter(!any(n == 0)) %>%
-      dplyr::ungroup() %>%
-      dplyr::select(!c(group, n)) %>%
-      tidyr::pivot_wider(names_from = name, values_from = mass) %>%
-      dplyr::select(-id)
-    
-    return(com_data)
-  }
-  
-  #Getting the complete data
+
+ complete_data_fn <- function(data, groups) {
+  # Rename the columns in the groups data
+  colnames(groups) <- c("name", "group")
+   
+  # Add a new column to preserve the original order of rows
+  data <- data %>% dplyr::mutate(original_order = dplyr::row_number())
+   
+  # Rename the first column of data
+  colnames(data)[1] <- "rowid"
+   
+  # Reshape the data into long format
+  long_data <- data %>%
+   tidyr::pivot_longer(-c(rowid, original_order), names_to = "name", values_to = "mass")
+   
+  # Merge with groups to add group information
+  long_data <- long_data %>%
+    dplyr::left_join(groups, by = "name")
+   
+  # Identify rows where any group has all missing values
+  group_summary <- long_data %>%
+    dplyr::group_by(rowid, group) %>%
+    dplyr::summarise(all_na = all(is.na(mass)), .groups = 'drop') %>%
+    dplyr::ungroup()
+   
+  # Identify rows to remove (where any group has all missing values)
+  rows_to_remove <- group_summary %>%
+    dplyr::group_by(rowid) %>%
+    dplyr::summarise(remove = any(all_na)) %>%
+    dplyr::filter(remove) %>%
+    dplyr::pull(rowid) %>%
+   unique()
+   
+  # Filter out rows with any completely missing group
+  filtered_data <- long_data %>%
+    dplyr::filter(!(rowid %in% rows_to_remove)) %>%
+    dplyr::select(-group)
+   
+  # Reshape back to wide format and reorder based on the original order
+  com_data <- filtered_data %>%
+   tidyr::pivot_wider(names_from = name, values_from = mass) %>%
+    dplyr::arrange(original_order) %>%
+    dplyr::select(-original_order)
+   
+  return(com_data)
+ } 
+ 
   com_data <- complete_data_fn (data_input, groups)
   
   #Giving original name to the first column
@@ -136,24 +151,28 @@ best_combination <- function (data_input, groups){
   #Removing the ID column and selecting remaining data
   com_data2 <- com_data1[,-1]
   
-  #Grouping of dataframe
-  grouping_data<-function(df){                      #df= dataframe
-    df_col<-ncol(df)                                #calculates no. of columns in dataframe
-    x <- table(groups$Groups)               #Extract the unique group value
-    s <- unique(x)
-    groups<-sort(rep(0:((df_col/s)-1),s))
-    id<-list()                                      #creates empty list
-    for (i in 1:length(unique(groups))){
-      id[[i]]<-which(groups == unique(groups)[i])}  #creates list of groups
-    names(id)<-paste0("id",unique(groups))          #assigns group based names to the list "id"
-    data<-list()                                    #creates empty list
-    for (i in 1:length(id)){
-      data[[i]]<-df[,id[[i]]]}                      #creates list of dataframe columns sorted by groups
-    names(data)<-paste0("data",unique(groups))      #assigns group based names to the list "data"
-    return(data)}
+  #Grouping of dataframe according to sample groups
+  grouping_data <- function(df, groups) {  # df = dataframe, groups = groups dataframe
+    # Rename columns in groups dataframe for consistency
+    colnames(groups) <- c("name", "group")
+    
+    # Create a list to store grouped columns
+    grouped_data <- list()
+    
+    # Loop through each unique group
+    for (group_name in unique(groups$group)) {
+      # Get the names of the columns that belong to the current group
+      group_columns <- groups$name[groups$group == group_name]
+      
+      # Extract the columns from df that match the current group columns
+      grouped_data[[group_name]] <- df[, group_columns, drop = FALSE]
+    }
+    
+    return(grouped_data)
+  }
   
   #Grouping of dataframe as a triplicate groups
-  group_data <- grouping_data(com_data2)
+  group_data <- grouping_data(com_data2, groups)
   
   #VSN Normalization function
   VSN_Norm <- function(dat) {
@@ -214,11 +233,11 @@ best_combination <- function (data_input, groups){
   rlr.dat <- do.call("cbind", lapply(group_data, RLR_Norm))
   
   #Grouping of normalized datasets
-  vsn_group_data <- grouping_data(vsn.dat)
+  vsn_group_data <- grouping_data(vsn.dat, groups)
   
-  loess_group_data <- grouping_data(loess.dat)
+  loess_group_data <- grouping_data(loess.dat, groups)
   
-  rlr_group_data <- grouping_data(rlr.dat)
+  rlr_group_data <- grouping_data(rlr.dat, groups)
   
   #Imputation of normalized datasets
   #KNN imputation

@@ -69,3 +69,6 @@ library(knitr)
 ## ----echo=FALSE, out.width = "800px"------------------------------------------
 knitr::include_graphics("images/flow1.jpg")
 
+## -----------------------------------------------------------------------------
+sessionInfo()
+

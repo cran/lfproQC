@@ -2,7 +2,7 @@
 #'
 #' @description Top table can be used for identifying the differential abundance analysis of proteins in the dataset.
 #'
-#' @format A data frame with 954 rows and 6 variables along with 'Fasta headers':
+#' @format A data frame with 835 rows and 6 variables along with 'Fasta headers':
 #' \describe{
 #'   \item{logFC}{Log fold change values}
 #'   \item{AveExpr}{Average intensity values}

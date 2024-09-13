@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-#' @examples MDSplot_data(knn_rlr_yeast_data)
+#' @examples MDSplot_data(rlr_knn_yeast_data)
 MDSplot_data <- function (data) {
   X <- Y <- Sample <- NULL
   data1 <- data[,-1]

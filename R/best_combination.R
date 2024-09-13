@@ -37,31 +37,31 @@
 #'
 #' `rlr_data` The `rlr` normalized dataset
 #'
-#' `knn_vsn_data` The dataset normalized by `vsn` method and missing values imputed
+#' `vsn_knn_data` The dataset normalized by `vsn` method and missing values imputed
 #'              by `knn` method.
-#'
-#' `knn_loess_data` The dataset normalized by `loess` method and missing values imputed
-#'              by `knn` method.
-#'
-#' `knn_rlr_data` The dataset normalized by `rlr` method and missing values imputed
-#'              by `knn` method.
-#'
-#' `lls_vsn_data` The dataset normalized by `vsn` method and missing values imputed
+#'              
+#' `vsn_lls_data` The dataset normalized by `vsn` method and missing values imputed
 #'              by `lls` method.
-#'
-#' `lls_loess_data` The dataset normalized by `loess` method and missing values imputed
-#'              by `lls` method.
-#'
-#' `lls_rlr_data` The dataset normalized by `rlr` method and missing values imputed
-#'              by `lls` method.
-#'
-#' `svd_vsn_data` The dataset normalized by `vsn` method and missing values imputed
+#'              
+#' `vsn_svd_data` The dataset normalized by `vsn` method and missing values imputed
 #'              by `svd` method.
 #'
-#' `svd_loess_data` The dataset normalized by `loess` method and missing values imputed
-#'              by `svd` method.
+#' `loess_knn_data` The dataset normalized by `loess` method and missing values imputed
+#'              by `knn` method.
 #'
-#' `svd_rlr_data` The dataset normalized by `rlr` method and missing values imputed
+#' `loess_lls_data` The dataset normalized by `loess` method and missing values imputed
+#'              by `lls` method.
+#'              
+#' `loess_svd_data` The dataset normalized by `loess` method and missing values imputed
+#'              by `svd` method.
+#'              
+#' `rlr_knn_data` The dataset normalized by `rlr` method and missing values imputed
+#'              by `knn` method.
+#'
+#' `rlr_lls_data` The dataset normalized by `rlr` method and missing values imputed
+#'              by `lls` method.
+#'
+#' `rlr_svd_data` The dataset normalized by `rlr` method and missing values imputed
 #'              by `svd` method.
 #'
 #' @author
@@ -77,7 +77,7 @@
 #' result$`Best combinations`
 #' result$`PCV Result`
 #' result$`PMAD Result`
-#' result$`knn_rlr_data`
+#' result$`rlr_knn_data`
 #' }
 
 #Main function for finding out the top three combinations
@@ -264,32 +264,32 @@ best_combination <- function (data_input, groups){
     return(dataSet.imputed)
   }
   
-  #KNN and VSN
-  knn.vsn.dat <- do.call("cbind", lapply(vsn_group_data, KNN_Imputation))
+  #VSN and KNN
+  vsn.knn.dat <- do.call("cbind", lapply(vsn_group_data, KNN_Imputation))
   
-  #LLS and VSN
-  lls.vsn.dat <- do.call("cbind", lapply(vsn_group_data, LLS_Imputation))
+  #VSN and LLS
+  vsn.lls.dat <- do.call("cbind", lapply(vsn_group_data, LLS_Imputation))
   
-  #SVD and VSN
-  svd.vsn.dat <- do.call("cbind", lapply(vsn_group_data, SVD_Imputation))
+  #VSN and SVD
+  vsn.svd.dat <- do.call("cbind", lapply(vsn_group_data, SVD_Imputation))
   
-  #KNN and LOESS
-  knn.loess.dat <- do.call("cbind", lapply(loess_group_data, KNN_Imputation))
+  #LOESS and KNN
+  loess.knn.dat <- do.call("cbind", lapply(loess_group_data, KNN_Imputation))
   
-  #LLS and LOESS
-  lls.loess.dat <- do.call("cbind", lapply(loess_group_data, LLS_Imputation))
+  #LOESS and LLS
+  loess.lls.dat <- do.call("cbind", lapply(loess_group_data, LLS_Imputation))
   
-  #SVD and LOESS
-  svd.loess.dat <- do.call("cbind", lapply(loess_group_data, SVD_Imputation))
+  #LOESS and SVD
+  loess.svd.dat <- do.call("cbind", lapply(loess_group_data, SVD_Imputation))
   
-  #KNN and RLR
-  knn.rlr.dat <- do.call("cbind", lapply(rlr_group_data, KNN_Imputation))
+  #RLR and KNN
+  rlr.knn.dat <- do.call("cbind", lapply(rlr_group_data, KNN_Imputation))
   
-  #LLS and RLR
-  lls.rlr.dat <- do.call("cbind", lapply(rlr_group_data, LLS_Imputation))
+  #RLR and LLS
+  rlr.lls.dat <- do.call("cbind", lapply(rlr_group_data, LLS_Imputation))
   
-  #SVD and RLR
-  svd.rlr.dat <- do.call("cbind", lapply(rlr_group_data, SVD_Imputation))
+  #RLR and SVD
+  rlr.svd.dat <- do.call("cbind", lapply(rlr_group_data, SVD_Imputation))
   
   #Transposing the sample to wide format
   new_sample <- as.data.frame(t(groups))
@@ -298,15 +298,15 @@ best_combination <- function (data_input, groups){
   
   #Changing all data files column names
   new_colnames <- colnames(sample)
-  colnames(knn.vsn.dat) <- new_colnames
-  colnames(knn.loess.dat) <- new_colnames
-  colnames(knn.rlr.dat) <- new_colnames
-  colnames(lls.vsn.dat) <- new_colnames
-  colnames(lls.loess.dat) <- new_colnames
-  colnames(lls.rlr.dat) <- new_colnames
-  colnames(svd.vsn.dat) <- new_colnames
-  colnames(svd.loess.dat) <- new_colnames
-  colnames(svd.rlr.dat) <- new_colnames
+  colnames(vsn.knn.dat) <- new_colnames
+  colnames(vsn.lls.dat) <- new_colnames
+  colnames(vsn.svd.dat) <- new_colnames
+  colnames(loess.knn.dat) <- new_colnames
+  colnames(loess.lls.dat) <- new_colnames
+  colnames(loess.svd.dat) <- new_colnames
+  colnames(rlr.knn.dat) <- new_colnames
+  colnames(rlr.lls.dat) <- new_colnames
+  colnames(rlr.svd.dat) <- new_colnames
   
   #Group wise PCV
   Group_data_PCV = function(data, groups){
@@ -326,56 +326,56 @@ best_combination <- function (data_input, groups){
   }
   
   #PCV calculation_groupwise
-  test1 <- Group_data_PCV(knn.vsn.dat, sample)
-  knn_vsn_PCV_mean <- cbind(Type ="knn_vsn", test1$Group_data_PCV_mean)
-  knn_vsn_PCV_median <- cbind(Type ="knn_vsn", test1$Group_data_PCV_median)
-  knn_vsn_PCV_sd <- cbind(Type ="knn_vsn", test1$Group_data_PCV_sd)
+  test1 <- Group_data_PCV(vsn.knn.dat, sample)
+  vsn_knn_PCV_mean <- cbind(Type ="vsn_knn", test1$Group_data_PCV_mean)
+  vsn_knn_PCV_median <- cbind(Type ="vsn_knn", test1$Group_data_PCV_median)
+  vsn_knn_PCV_sd <- cbind(Type ="vsn_knn", test1$Group_data_PCV_sd)
   
-  test2 <- Group_data_PCV(knn.loess.dat, sample)
-  knn_loess_PCV_mean <- cbind(Type ="knn_loess", test2$Group_data_PCV_mean)
-  knn_loess_PCV_median <- cbind(Type ="knn_loess", test2$Group_data_PCV_median)
-  knn_loess_PCV_sd <- cbind(Type ="knn_loess", test2$Group_data_PCV_sd)
+  test2 <- Group_data_PCV(vsn.lls.dat, sample)
+  vsn_lls_PCV_mean <- cbind(Type ="vsn_lls", test2$Group_data_PCV_mean)
+  vsn_lls_PCV_median <- cbind(Type ="vsn_lls", test2$Group_data_PCV_median)
+  vsn_lls_PCV_sd <- cbind(Type ="vsn_lls", test2$Group_data_PCV_sd)
   
-  test3 <- Group_data_PCV(knn.rlr.dat, sample)
-  knn_rlr_PCV_mean <- cbind(Type ="knn_rlr", test3$Group_data_PCV_mean)
-  knn_rlr_PCV_median <- cbind(Type ="knn_rlr", test3$Group_data_PCV_median)
-  knn_rlr_PCV_sd <- cbind(Type ="knn_rlr", test3$Group_data_PCV_sd)
+  test3 <- Group_data_PCV(vsn.svd.dat, sample)
+  vsn_svd_PCV_mean <- cbind(Type ="vsn_svd", test3$Group_data_PCV_mean)
+  vsn_svd_PCV_median <- cbind(Type ="vsn_svd", test3$Group_data_PCV_median)
+  vsn_svd_PCV_sd <- cbind(Type ="vsn_svd", test3$Group_data_PCV_sd)
   
-  test4 <- Group_data_PCV(lls.vsn.dat, sample)
-  lls_vsn_PCV_mean <- cbind(Type ="lls_vsn", test4$Group_data_PCV_mean)
-  lls_vsn_PCV_median <- cbind(Type ="lls_vsn", test4$Group_data_PCV_median)
-  lls_vsn_PCV_sd <- cbind(Type ="lls_vsn", test4$Group_data_PCV_sd)
+  test4 <- Group_data_PCV(loess.knn.dat, sample)
+  loess_knn_PCV_mean <- cbind(Type ="loess_knn", test4$Group_data_PCV_mean)
+  loess_knn_PCV_median <- cbind(Type ="loess_knn", test4$Group_data_PCV_median)
+  loess_knn_PCV_sd <- cbind(Type ="loess_knn", test4$Group_data_PCV_sd)
   
-  test5 <- Group_data_PCV(lls.loess.dat, sample)
-  lls_loess_PCV_mean <- cbind(Type ="lls_loess", test5$Group_data_PCV_mean)
-  lls_loess_PCV_median <- cbind(Type ="lls_loess", test5$Group_data_PCV_median)
-  lls_loess_PCV_sd <- cbind(Type ="lls_loess", test5$Group_data_PCV_sd)
+  test5 <- Group_data_PCV(loess.lls.dat, sample)
+  loess_lls_PCV_mean <- cbind(Type ="loess_lls", test5$Group_data_PCV_mean)
+  loess_lls_PCV_median <- cbind(Type ="loess_lls", test5$Group_data_PCV_median)
+  loess_lls_PCV_sd <- cbind(Type ="loess_lls", test5$Group_data_PCV_sd)
   
-  test6 <- Group_data_PCV(lls.rlr.dat, sample)
-  lls_rlr_PCV_mean <- cbind(Type ="lls_rlr", test6$Group_data_PCV_mean)
-  lls_rlr_PCV_median <- cbind(Type ="lls_rlr", test6$Group_data_PCV_median)
-  lls_rlr_PCV_sd <- cbind(Type ="lls_rlr", test6$Group_data_PCV_sd)
+  test6 <- Group_data_PCV(loess.svd.dat, sample)
+  loess_svd_PCV_mean <- cbind(Type ="loess_svd", test6$Group_data_PCV_mean)
+  loess_svd_PCV_median <- cbind(Type ="loess_svd", test6$Group_data_PCV_median)
+  loess_svd_PCV_sd <- cbind(Type ="loess_svd", test6$Group_data_PCV_sd)
   
-  test7 <- Group_data_PCV(svd.vsn.dat, sample)
-  svd_vsn_PCV_mean <- cbind(Type ="svd_vsn", test7$Group_data_PCV_mean)
-  svd_vsn_PCV_median <- cbind(Type ="svd_vsn", test7$Group_data_PCV_median)
-  svd_vsn_PCV_sd <- cbind(Type ="svd_vsn", test7$Group_data_PCV_sd)
+  test7 <- Group_data_PCV(rlr.knn.dat, sample)
+  rlr_knn_PCV_mean <- cbind(Type ="rlr_knn", test7$Group_data_PCV_mean)
+  rlr_knn_PCV_median <- cbind(Type ="rlr_knn", test7$Group_data_PCV_median)
+  rlr_knn_PCV_sd <- cbind(Type ="rlr_knn", test7$Group_data_PCV_sd)
   
-  test8 <- Group_data_PCV(svd.loess.dat, sample)
-  svd_loess_PCV_mean <- cbind(Type ="svd_loess", test8$Group_data_PCV_mean)
-  svd_loess_PCV_median <- cbind(Type ="svd_loess", test8$Group_data_PCV_median)
-  svd_loess_PCV_sd <- cbind(Type ="svd_loess", test8$Group_data_PCV_sd)
+  test8 <- Group_data_PCV(rlr.lls.dat, sample)
+  rlr_lls_PCV_mean <- cbind(Type ="rlr_lls", test8$Group_data_PCV_mean)
+  rlr_lls_PCV_median <- cbind(Type ="rlr_lls", test8$Group_data_PCV_median)
+  rlr_lls_PCV_sd <- cbind(Type ="rlr_lls", test8$Group_data_PCV_sd)
   
-  test9 <- Group_data_PCV(svd.rlr.dat, sample)
-  svd_rlr_PCV_mean <- cbind(Type ="svd_rlr", test9$Group_data_PCV_mean)
-  svd_rlr_PCV_median <- cbind(Type ="svd_rlr", test9$Group_data_PCV_median)
-  svd_rlr_PCV_sd <- cbind(Type ="svd_rlr", test9$Group_data_PCV_sd)
+  test9 <- Group_data_PCV(rlr.svd.dat, sample)
+  rlr_svd_PCV_mean <- cbind(Type ="rlr_svd", test9$Group_data_PCV_mean)
+  rlr_svd_PCV_median <- cbind(Type ="rlr_svd", test9$Group_data_PCV_median)
+  rlr_svd_PCV_sd <- cbind(Type ="rlr_svd", test9$Group_data_PCV_sd)
   
   ###PCV_mean
   #Combining all the above results
-  total_pcv_mean <- plyr::rbind.fill(knn_vsn_PCV_mean, knn_loess_PCV_mean, knn_rlr_PCV_mean, 
-                                     lls_vsn_PCV_mean, lls_loess_PCV_mean, lls_rlr_PCV_mean, 
-                                     svd_vsn_PCV_mean, svd_loess_PCV_mean, svd_rlr_PCV_mean)
+  total_pcv_mean <- plyr::rbind.fill(vsn_knn_PCV_mean, vsn_lls_PCV_mean, vsn_svd_PCV_mean, 
+                                     loess_knn_PCV_mean, loess_lls_PCV_mean, loess_svd_PCV_mean, 
+                                     rlr_knn_PCV_mean, rlr_lls_PCV_mean, rlr_svd_PCV_mean)
   
   #Separating the results groupwise
   total_Group_data_PCV_mean <- total_pcv_mean %>%
@@ -400,9 +400,9 @@ best_combination <- function (data_input, groups){
   
   ###PCV_median
   #Combining all the above results
-  total_pcv_median <- plyr::rbind.fill(knn_vsn_PCV_median, knn_loess_PCV_median, knn_rlr_PCV_median, 
-                                       lls_vsn_PCV_median, lls_loess_PCV_median, lls_rlr_PCV_median, 
-                                       svd_vsn_PCV_median, svd_loess_PCV_median, svd_rlr_PCV_median)
+  total_pcv_median <- plyr::rbind.fill(vsn_knn_PCV_median, vsn_lls_PCV_median, vsn_svd_PCV_median, 
+                                     loess_knn_PCV_median, loess_lls_PCV_median, loess_svd_PCV_median, 
+                                     rlr_knn_PCV_median, rlr_lls_PCV_median, rlr_svd_PCV_median)
   
   #Separating the results groupwise
   total_Group_data_PCV_median <- total_pcv_median %>%
@@ -427,9 +427,9 @@ best_combination <- function (data_input, groups){
   
   ###PCV_sd
   #Combining all the above results
-  total_pcv_sd <- plyr::rbind.fill(knn_vsn_PCV_sd, knn_loess_PCV_sd, knn_rlr_PCV_sd, 
-                                   lls_vsn_PCV_sd, lls_loess_PCV_sd, lls_rlr_PCV_sd, 
-                                   svd_vsn_PCV_sd, svd_loess_PCV_sd, svd_rlr_PCV_sd)
+  total_pcv_sd <- plyr::rbind.fill(vsn_knn_PCV_sd, vsn_lls_PCV_sd, vsn_svd_PCV_sd, 
+                                     loess_knn_PCV_sd, loess_lls_PCV_sd, loess_svd_PCV_sd, 
+                                     rlr_knn_PCV_sd, rlr_lls_PCV_sd, rlr_svd_PCV_sd)
   
   #Separating the results groupwise
   total_Group_data_PCV_sd <- total_pcv_sd %>%
@@ -467,32 +467,32 @@ best_combination <- function (data_input, groups){
   
   
   #Overall PCV_mean estimation
-  test1 <- Total_data_PCV(knn.vsn.dat)
-  data1 <- cbind(Type ="knn_vsn", test1$PCV_mean)
+  test1 <- Total_data_PCV(vsn.knn.dat)
+  data1 <- cbind(Type ="vsn_knn", test1$PCV_mean)
   
-  test2 <- Total_data_PCV(knn.loess.dat)
-  data2 <- cbind(Type ="knn_loess", test2$PCV_mean)
+  test2 <- Total_data_PCV(vsn.lls.dat)
+  data2 <- cbind(Type ="vsn_lls", test2$PCV_mean)
   
-  test3 <- Total_data_PCV(knn.rlr.dat)
-  data3 <- cbind(Type ="knn_rlr", test3$PCV_mean)
+  test3 <- Total_data_PCV(vsn.svd.dat)
+  data3 <- cbind(Type ="vsn_svd", test3$PCV_mean)
   
-  test4 <- Total_data_PCV(lls.vsn.dat)
-  data4 <- cbind(Type ="lls_vsn", test4$PCV_mean)
+  test4 <- Total_data_PCV(loess.knn.dat)
+  data4 <- cbind(Type ="loess_knn", test4$PCV_mean)
   
-  test5 <- Total_data_PCV(lls.loess.dat)
-  data5 <- cbind(Type ="lls_loess", test5$PCV_mean)
+  test5 <- Total_data_PCV(loess.lls.dat)
+  data5 <- cbind(Type ="loess_lls", test5$PCV_mean)
   
-  test6 <- Total_data_PCV(lls.rlr.dat)
-  data6 <- cbind(Type ="lls_rlr", test6$PCV_mean)
+  test6 <- Total_data_PCV(loess.svd.dat)
+  data6 <- cbind(Type ="loess_svd", test6$PCV_mean)
   
-  test7 <- Total_data_PCV(svd.vsn.dat)
-  data7 <- cbind(Type ="svd_vsn", test7$PCV_mean)
+  test7 <- Total_data_PCV(rlr.knn.dat)
+  data7 <- cbind(Type ="rlr_knn", test7$PCV_mean)
   
-  test8 <- Total_data_PCV(svd.loess.dat)
-  data8 <- cbind(Type ="svd_loess", test8$PCV_mean)
+  test8 <- Total_data_PCV(rlr.lls.dat)
+  data8 <- cbind(Type ="rlr_lls", test8$PCV_mean)
   
-  test9 <- Total_data_PCV(svd.rlr.dat)
-  data9 <- cbind(Type ="svd_rlr", test9$PCV_mean)
+  test9 <- Total_data_PCV(rlr.svd.dat)
+  data9 <- cbind(Type ="rlr_svd", test9$PCV_mean)
   
   #Combining all the above results
   total_pcv_overall_mean2 <- as.data.frame(plyr::rbind.fill(data1, data2, data3, data4, data5, data6, data7, data8, data9))
@@ -503,32 +503,32 @@ best_combination <- function (data_input, groups){
   colnames(total_pcv_overall_mean) <- original_cols
   
   #Overall PCV_median estimation
-  test1 <- Total_data_PCV(knn.vsn.dat)
-  data1 <- cbind(Type ="knn_vsn", test1$PCV_median)
+  test1 <- Total_data_PCV(vsn.knn.dat)
+  data1 <- cbind(Type ="vsn_knn", test1$PCV_median)
   
-  test2 <- Total_data_PCV(knn.loess.dat)
-  data2 <- cbind(Type ="knn_loess", test2$PCV_median)
+  test2 <- Total_data_PCV(vsn.lls.dat)
+  data2 <- cbind(Type ="vsn_lls", test2$PCV_median)
   
-  test3 <- Total_data_PCV(knn.rlr.dat)
-  data3 <- cbind(Type ="knn_rlr", test3$PCV_median)
+  test3 <- Total_data_PCV(vsn.svd.dat)
+  data3 <- cbind(Type ="vsn_svd", test3$PCV_median)
   
-  test4 <- Total_data_PCV(lls.vsn.dat)
-  data4 <- cbind(Type ="lls_vsn", test4$PCV_median)
+  test4 <- Total_data_PCV(loess.knn.dat)
+  data4 <- cbind(Type ="loess_knn", test4$PCV_median)
   
-  test5 <- Total_data_PCV(lls.loess.dat)
-  data5 <- cbind(Type ="lls_loess", test5$PCV_median)
+  test5 <- Total_data_PCV(loess.lls.dat)
+  data5 <- cbind(Type ="loess_lls", test5$PCV_median)
   
-  test6 <- Total_data_PCV(lls.rlr.dat)
-  data6 <- cbind(Type ="lls_rlr", test6$PCV_median)
+  test6 <- Total_data_PCV(loess.svd.dat)
+  data6 <- cbind(Type ="loess_svd", test6$PCV_median)
   
-  test7 <- Total_data_PCV(svd.vsn.dat)
-  data7 <- cbind(Type ="svd_vsn", test7$PCV_median)
+  test7 <- Total_data_PCV(rlr.knn.dat)
+  data7 <- cbind(Type ="rlr_knn", test7$PCV_median)
   
-  test8 <- Total_data_PCV(svd.loess.dat)
-  data8 <- cbind(Type ="svd_loess", test8$PCV_median)
+  test8 <- Total_data_PCV(rlr.lls.dat)
+  data8 <- cbind(Type ="rlr_lls", test8$PCV_median)
   
-  test9 <- Total_data_PCV(svd.rlr.dat)
-  data9 <- cbind(Type ="svd_rlr", test9$PCV_median)
+  test9 <- Total_data_PCV(rlr.svd.dat)
+  data9 <- cbind(Type ="rlr_svd", test9$PCV_median)
   
   #Combining all the above results
   total_pcv_overall_median2 <- as.data.frame(plyr::rbind.fill(data1, data2, data3, data4, data5, data6, data7, data8, data9))
@@ -539,32 +539,32 @@ best_combination <- function (data_input, groups){
   colnames(total_pcv_overall_median) <- original_cols
   
   #Overall PCV_sd estimation
-  test1 <- Total_data_PCV(knn.vsn.dat)
-  data1 <- cbind(Type ="knn_vsn", test1$PCV_sd)
+  test1 <- Total_data_PCV(vsn.knn.dat)
+  data1 <- cbind(Type ="vsn_knn", test1$PCV_sd)
   
-  test2 <- Total_data_PCV(knn.loess.dat)
-  data2 <- cbind(Type ="knn_loess", test2$PCV_sd)
+  test2 <- Total_data_PCV(vsn.lls.dat)
+  data2 <- cbind(Type ="vsn_lls", test2$PCV_sd)
   
-  test3 <- Total_data_PCV(knn.rlr.dat)
-  data3 <- cbind(Type ="knn_rlr", test3$PCV_sd)
+  test3 <- Total_data_PCV(vsn.svd.dat)
+  data3 <- cbind(Type ="vsn_svd", test3$PCV_sd)
   
-  test4 <- Total_data_PCV(lls.vsn.dat)
-  data4 <- cbind(Type ="lls_vsn", test4$PCV_sd)
+  test4 <- Total_data_PCV(loess.knn.dat)
+  data4 <- cbind(Type ="loess_knn", test4$PCV_sd)
   
-  test5 <- Total_data_PCV(lls.loess.dat)
-  data5 <- cbind(Type ="lls_loess", test5$PCV_sd)
+  test5 <- Total_data_PCV(loess.lls.dat)
+  data5 <- cbind(Type ="loess_lls", test5$PCV_sd)
   
-  test6 <- Total_data_PCV(lls.rlr.dat)
-  data6 <- cbind(Type ="lls_rlr", test6$PCV_sd)
+  test6 <- Total_data_PCV(loess.svd.dat)
+  data6 <- cbind(Type ="loess_svd", test6$PCV_sd)
   
-  test7 <- Total_data_PCV(svd.vsn.dat)
-  data7 <- cbind(Type ="svd_vsn", test7$PCV_sd)
+  test7 <- Total_data_PCV(rlr.knn.dat)
+  data7 <- cbind(Type ="rlr_knn", test7$PCV_sd)
   
-  test8 <- Total_data_PCV(svd.loess.dat)
-  data8 <- cbind(Type ="svd_loess", test8$PCV_sd)
+  test8 <- Total_data_PCV(rlr.lls.dat)
+  data8 <- cbind(Type ="rlr_lls", test8$PCV_sd)
   
-  test9 <- Total_data_PCV(svd.rlr.dat)
-  data9 <- cbind(Type ="svd_rlr", test9$PCV_sd)
+  test9 <- Total_data_PCV(rlr.svd.dat)
+  data9 <- cbind(Type ="rlr_svd", test9$PCV_sd)
   
   #Combining all the above results
   total_pcv_overall_sd2 <- as.data.frame(plyr::rbind.fill(data1, data2, data3, data4, data5, data6, data7, data8, data9))
@@ -615,56 +615,56 @@ best_combination <- function (data_input, groups){
   
   
   #PEV calculation_groupwise
-  test1 <- Group_data_PEV(knn.vsn.dat, sample)
-  knn_vsn_PEV_mean <- cbind(Type ="knn_vsn", test1$Group_data_PEV_mean)
-  knn_vsn_PEV_median <- cbind(Type ="knn_vsn", test1$Group_data_PEV_median)
-  knn_vsn_PEV_sd <- cbind(Type ="knn_vsn", test1$Group_data_PEV_sd)
+  test1 <- Group_data_PEV(vsn.knn.dat, sample)
+  vsn_knn_PEV_mean <- cbind(Type ="vsn_knn", test1$Group_data_PEV_mean)
+  vsn_knn_PEV_median <- cbind(Type ="vsn_knn", test1$Group_data_PEV_median)
+  vsn_knn_PEV_sd <- cbind(Type ="vsn_knn", test1$Group_data_PEV_sd)
   
-  test2 <- Group_data_PEV(knn.loess.dat, sample)
-  knn_loess_PEV_mean <- cbind(Type ="knn_loess", test2$Group_data_PEV_mean)
-  knn_loess_PEV_median <- cbind(Type ="knn_loess", test2$Group_data_PEV_median)
-  knn_loess_PEV_sd <- cbind(Type ="knn_loess", test2$Group_data_PEV_sd)
+  test2 <- Group_data_PEV(vsn.lls.dat, sample)
+  vsn_lls_PEV_mean <- cbind(Type ="vsn_lls", test2$Group_data_PEV_mean)
+  vsn_lls_PEV_median <- cbind(Type ="vsn_lls", test2$Group_data_PEV_median)
+  vsn_lls_PEV_sd <- cbind(Type ="vsn_lls", test2$Group_data_PEV_sd)
   
-  test3 <- Group_data_PEV(knn.rlr.dat, sample)
-  knn_rlr_PEV_mean <- cbind(Type ="knn_rlr", test3$Group_data_PEV_mean)
-  knn_rlr_PEV_median <- cbind(Type ="knn_rlr", test3$Group_data_PEV_median)
-  knn_rlr_PEV_sd <- cbind(Type ="knn_rlr", test3$Group_data_PEV_sd)
+  test3 <- Group_data_PEV(vsn.svd.dat, sample)
+  vsn_svd_PEV_mean <- cbind(Type ="vsn_svd", test3$Group_data_PEV_mean)
+  vsn_svd_PEV_median <- cbind(Type ="vsn_svd", test3$Group_data_PEV_median)
+  vsn_svd_PEV_sd <- cbind(Type ="vsn_svd", test3$Group_data_PEV_sd)
   
-  test4 <- Group_data_PEV(lls.vsn.dat, sample)
-  lls_vsn_PEV_mean <- cbind(Type ="lls_vsn", test4$Group_data_PEV_mean)
-  lls_vsn_PEV_median <- cbind(Type ="lls_vsn", test4$Group_data_PEV_median)
-  lls_vsn_PEV_sd <- cbind(Type ="lls_vsn", test4$Group_data_PEV_sd)
+  test4 <- Group_data_PEV(loess.knn.dat, sample)
+  loess_knn_PEV_mean <- cbind(Type ="loess_knn", test4$Group_data_PEV_mean)
+  loess_knn_PEV_median <- cbind(Type ="loess_knn", test4$Group_data_PEV_median)
+  loess_knn_PEV_sd <- cbind(Type ="loess_knn", test4$Group_data_PEV_sd)
   
-  test5 <- Group_data_PEV(lls.loess.dat, sample)
-  lls_loess_PEV_mean <- cbind(Type ="lls_loess", test5$Group_data_PEV_mean)
-  lls_loess_PEV_median <- cbind(Type ="lls_loess", test5$Group_data_PEV_median)
-  lls_loess_PEV_sd <- cbind(Type ="lls_loess", test5$Group_data_PEV_sd)
+  test5 <- Group_data_PEV(loess.lls.dat, sample)
+  loess_lls_PEV_mean <- cbind(Type ="loess_lls", test5$Group_data_PEV_mean)
+  loess_lls_PEV_median <- cbind(Type ="loess_lls", test5$Group_data_PEV_median)
+  loess_lls_PEV_sd <- cbind(Type ="loess_lls", test5$Group_data_PEV_sd)
   
-  test6 <- Group_data_PEV(lls.rlr.dat, sample)
-  lls_rlr_PEV_mean <- cbind(Type ="lls_rlr", test6$Group_data_PEV_mean)
-  lls_rlr_PEV_median <- cbind(Type ="lls_rlr", test6$Group_data_PEV_median)
-  lls_rlr_PEV_sd <- cbind(Type ="lls_rlr", test6$Group_data_PEV_sd)
+  test6 <- Group_data_PEV(loess.svd.dat, sample)
+  loess_svd_PEV_mean <- cbind(Type ="loess_svd", test6$Group_data_PEV_mean)
+  loess_svd_PEV_median <- cbind(Type ="loess_svd", test6$Group_data_PEV_median)
+  loess_svd_PEV_sd <- cbind(Type ="loess_svd", test6$Group_data_PEV_sd)
   
-  test7 <- Group_data_PEV(svd.vsn.dat, sample)
-  svd_vsn_PEV_mean <- cbind(Type ="svd_vsn", test7$Group_data_PEV_mean)
-  svd_vsn_PEV_median <- cbind(Type ="svd_vsn", test7$Group_data_PEV_median)
-  svd_vsn_PEV_sd <- cbind(Type ="svd_vsn", test7$Group_data_PEV_sd)
+  test7 <- Group_data_PEV(rlr.knn.dat, sample)
+  rlr_knn_PEV_mean <- cbind(Type ="rlr_knn", test7$Group_data_PEV_mean)
+  rlr_knn_PEV_median <- cbind(Type ="rlr_knn", test7$Group_data_PEV_median)
+  rlr_knn_PEV_sd <- cbind(Type ="rlr_knn", test7$Group_data_PEV_sd)
   
-  test8 <- Group_data_PEV(svd.loess.dat, sample)
-  svd_loess_PEV_mean <- cbind(Type ="svd_loess", test8$Group_data_PEV_mean)
-  svd_loess_PEV_median <- cbind(Type ="svd_loess", test8$Group_data_PEV_median)
-  svd_loess_PEV_sd <- cbind(Type ="svd_loess", test8$Group_data_PEV_sd)
+  test8 <- Group_data_PEV(rlr.lls.dat, sample)
+  rlr_lls_PEV_mean <- cbind(Type ="rlr_lls", test8$Group_data_PEV_mean)
+  rlr_lls_PEV_median <- cbind(Type ="rlr_lls", test8$Group_data_PEV_median)
+  rlr_lls_PEV_sd <- cbind(Type ="rlr_lls", test8$Group_data_PEV_sd)
   
-  test9 <- Group_data_PEV(svd.rlr.dat, sample)
-  svd_rlr_PEV_mean <- cbind(Type ="svd_rlr", test9$Group_data_PEV_mean)
-  svd_rlr_PEV_median <- cbind(Type ="svd_rlr", test9$Group_data_PEV_median)
-  svd_rlr_PEV_sd <- cbind(Type ="svd_rlr", test9$Group_data_PEV_sd)
+  test9 <- Group_data_PEV(rlr.svd.dat, sample)
+  rlr_svd_PEV_mean <- cbind(Type ="rlr_svd", test9$Group_data_PEV_mean)
+  rlr_svd_PEV_median <- cbind(Type ="rlr_svd", test9$Group_data_PEV_median)
+  rlr_svd_PEV_sd <- cbind(Type ="rlr_svd", test9$Group_data_PEV_sd)
   
   ###PEV_mean
   #Combining all the above results
-  total_pev_mean <- plyr::rbind.fill(knn_vsn_PEV_mean, knn_loess_PEV_mean, knn_rlr_PEV_mean, 
-                                     lls_vsn_PEV_mean, lls_loess_PEV_mean, lls_rlr_PEV_mean, 
-                                     svd_vsn_PEV_mean, svd_loess_PEV_mean, svd_rlr_PEV_mean)
+  total_pev_mean <- plyr::rbind.fill(vsn_knn_PEV_mean, vsn_lls_PEV_mean, vsn_svd_PEV_mean, 
+                                     loess_knn_PEV_mean, loess_lls_PEV_mean, loess_svd_PEV_mean, 
+                                     rlr_knn_PEV_mean, rlr_lls_PEV_mean, rlr_svd_PEV_mean)
   
   #Separating the results groupwise
   total_Group_data_PEV_mean <- total_pev_mean %>%
@@ -689,9 +689,9 @@ best_combination <- function (data_input, groups){
   
   ###PEV_median
   #Combining all the above results
-  total_pev_median <- plyr::rbind.fill(knn_vsn_PEV_median, knn_loess_PEV_median, knn_rlr_PEV_median, 
-                                       lls_vsn_PEV_median, lls_loess_PEV_median, lls_rlr_PEV_median, 
-                                       svd_vsn_PEV_median, svd_loess_PEV_median, svd_rlr_PEV_median)
+  total_pev_median <- plyr::rbind.fill(vsn_knn_PEV_median, vsn_lls_PEV_median, vsn_svd_PEV_median, 
+                                     loess_knn_PEV_median, loess_lls_PEV_median, loess_svd_PEV_median, 
+                                     rlr_knn_PEV_median, rlr_lls_PEV_median, rlr_svd_PEV_median)
   
   #Separating the results groupwise
   total_Group_data_PEV_median <- total_pev_median %>%
@@ -716,9 +716,9 @@ best_combination <- function (data_input, groups){
   
   ###PEV_sd
   #Combining all the above results
-  total_pev_sd <- plyr::rbind.fill(knn_vsn_PEV_sd, knn_loess_PEV_sd, knn_rlr_PEV_sd, 
-                                   lls_vsn_PEV_sd, lls_loess_PEV_sd, lls_rlr_PEV_sd, 
-                                   svd_vsn_PEV_sd, svd_loess_PEV_sd, svd_rlr_PEV_sd)
+  total_pev_sd <- plyr::rbind.fill(vsn_knn_PEV_sd, vsn_lls_PEV_sd, vsn_svd_PEV_sd, 
+                                     loess_knn_PEV_sd, loess_lls_PEV_sd, loess_svd_PEV_sd, 
+                                     rlr_knn_PEV_sd, rlr_lls_PEV_sd, rlr_svd_PEV_sd)
   
   #Separating the results groupwise
   total_Group_data_PEV_sd <- total_pev_sd %>%
@@ -757,33 +757,32 @@ best_combination <- function (data_input, groups){
   }
   
   #Overall PEV_mean estimation
-  test1 <- Total_data_PEV(knn.vsn.dat)
-  data1 <- cbind(Type ="knn_vsn", test1$PEV_mean)
+  test1 <- Total_data_PEV(vsn.knn.dat)
+  data1 <- cbind(Type ="vsn_knn", test1$PEV_mean)
   
-  test2 <- Total_data_PEV(knn.loess.dat)
-  data2 <- cbind(Type ="knn_loess", test2$PEV_mean)
+  test2 <- Total_data_PEV(vsn.lls.dat)
+  data2 <- cbind(Type ="vsn_lls", test2$PEV_mean)
   
-  test3 <- Total_data_PEV(knn.rlr.dat)
-  data3 <- cbind(Type ="knn_rlr", test3$PEV_mean)
+  test3 <- Total_data_PEV(vsn.svd.dat)
+  data3 <- cbind(Type ="vsn_svd", test3$PEV_mean)
   
-  test4 <- Total_data_PEV(lls.vsn.dat)
-  data4 <- cbind(Type ="lls_vsn", test4$PEV_mean)
+  test4 <- Total_data_PEV(loess.knn.dat)
+  data4 <- cbind(Type ="loess_knn", test4$PEV_mean)
   
-  test5 <- Total_data_PEV(lls.loess.dat)
-  data5 <- cbind(Type ="lls_loess", test5$PEV_mean)
+  test5 <- Total_data_PEV(loess.lls.dat)
+  data5 <- cbind(Type ="loess_lls", test5$PEV_mean)
   
-  test6 <- Total_data_PEV(lls.rlr.dat)
-  data6 <- cbind(Type ="lls_rlr", test6$PEV_mean)
+  test6 <- Total_data_PEV(loess.svd.dat)
+  data6 <- cbind(Type ="loess_svd", test6$PEV_mean)
   
-  test7 <- Total_data_PEV(svd.vsn.dat)
-  data7 <- cbind(Type ="svd_vsn", test7$PEV_mean)
+  test7 <- Total_data_PEV(rlr.knn.dat)
+  data7 <- cbind(Type ="rlr_knn", test7$PEV_mean)
   
-  test8 <- Total_data_PEV(svd.loess.dat)
-  data8 <- cbind(Type ="svd_loess", test8$PEV_mean)
+  test8 <- Total_data_PEV(rlr.lls.dat)
+  data8 <- cbind(Type ="rlr_lls", test8$PEV_mean)
   
-  test9 <- Total_data_PEV(svd.rlr.dat)
-  data9 <- cbind(Type ="svd_rlr", test9$PEV_mean)
-  
+  test9 <- Total_data_PEV(rlr.svd.dat)
+  data9 <- cbind(Type ="rlr_svd", test9$PEV_mean)
   
   #Combining all the above results
   total_pev_overall_mean2 <- as.data.frame(plyr::rbind.fill(data1, data2, data3, data4, data5, data6, data7, data8, data9))
@@ -794,32 +793,32 @@ best_combination <- function (data_input, groups){
   colnames(total_pev_overall_mean) <- original_cols
   
   #Overall PCV_median estimation
-  test1 <- Total_data_PEV(knn.vsn.dat)
-  data1 <- cbind(Type ="knn_vsn", test1$PEV_median)
+  test1 <- Total_data_PEV(vsn.knn.dat)
+  data1 <- cbind(Type ="vsn_knn", test1$PEV_median)
   
-  test2 <- Total_data_PEV(knn.loess.dat)
-  data2 <- cbind(Type ="knn_loess", test2$PEV_median)
+  test2 <- Total_data_PEV(vsn.lls.dat)
+  data2 <- cbind(Type ="vsn_lls", test2$PEV_median)
   
-  test3 <- Total_data_PEV(knn.rlr.dat)
-  data3 <- cbind(Type ="knn_rlr", test3$PEV_median)
+  test3 <- Total_data_PEV(vsn.svd.dat)
+  data3 <- cbind(Type ="vsn_svd", test3$PEV_median)
   
-  test4 <- Total_data_PEV(lls.vsn.dat)
-  data4 <- cbind(Type ="lls_vsn", test4$PEV_median)
+  test4 <- Total_data_PEV(loess.knn.dat)
+  data4 <- cbind(Type ="loess_knn", test4$PEV_median)
   
-  test5 <- Total_data_PEV(lls.loess.dat)
-  data5 <- cbind(Type ="lls_loess", test5$PEV_median)
+  test5 <- Total_data_PEV(loess.lls.dat)
+  data5 <- cbind(Type ="loess_lls", test5$PEV_median)
   
-  test6 <- Total_data_PEV(lls.rlr.dat)
-  data6 <- cbind(Type ="lls_rlr", test6$PEV_median)
+  test6 <- Total_data_PEV(loess.svd.dat)
+  data6 <- cbind(Type ="loess_svd", test6$PEV_median)
   
-  test7 <- Total_data_PEV(svd.vsn.dat)
-  data7 <- cbind(Type ="svd_vsn", test7$PEV_median)
+  test7 <- Total_data_PEV(rlr.knn.dat)
+  data7 <- cbind(Type ="rlr_knn", test7$PEV_median)
   
-  test8 <- Total_data_PEV(svd.loess.dat)
-  data8 <- cbind(Type ="svd_loess", test8$PEV_median)
+  test8 <- Total_data_PEV(rlr.lls.dat)
+  data8 <- cbind(Type ="rlr_lls", test8$PEV_median)
   
-  test9 <- Total_data_PEV(svd.rlr.dat)
-  data9 <- cbind(Type ="svd_rlr", test9$PEV_median)
+  test9 <- Total_data_PEV(rlr.svd.dat)
+  data9 <- cbind(Type ="rlr_svd", test9$PEV_median)
   
   #Combining all the above results
   total_pev_overall_median2 <- as.data.frame(plyr::rbind.fill(data1, data2, data3, data4, data5, data6, data7, data8, data9))
@@ -830,32 +829,32 @@ best_combination <- function (data_input, groups){
   colnames(total_pev_overall_median) <- original_cols
   
   #Overall PEV_sd estimation
-  test1 <- Total_data_PEV(knn.vsn.dat)
-  data1 <- cbind(Type ="knn_vsn", test1$PEV_sd)
+  test1 <- Total_data_PEV(vsn.knn.dat)
+  data1 <- cbind(Type ="vsn_knn", test1$PEV_sd)
   
-  test2 <- Total_data_PEV(knn.loess.dat)
-  data2 <- cbind(Type ="knn_loess", test2$PEV_sd)
+  test2 <- Total_data_PEV(vsn.lls.dat)
+  data2 <- cbind(Type ="vsn_lls", test2$PEV_sd)
   
-  test3 <- Total_data_PEV(knn.rlr.dat)
-  data3 <- cbind(Type ="knn_rlr", test3$PEV_sd)
+  test3 <- Total_data_PEV(vsn.svd.dat)
+  data3 <- cbind(Type ="vsn_svd", test3$PEV_sd)
   
-  test4 <- Total_data_PEV(lls.vsn.dat)
-  data4 <- cbind(Type ="lls_vsn", test4$PEV_sd)
+  test4 <- Total_data_PEV(loess.knn.dat)
+  data4 <- cbind(Type ="loess_knn", test4$PEV_sd)
   
-  test5 <- Total_data_PEV(lls.loess.dat)
-  data5 <- cbind(Type ="lls_loess", test5$PEV_sd)
+  test5 <- Total_data_PEV(loess.lls.dat)
+  data5 <- cbind(Type ="loess_lls", test5$PEV_sd)
   
-  test6 <- Total_data_PEV(lls.rlr.dat)
-  data6 <- cbind(Type ="lls_rlr", test6$PEV_sd)
+  test6 <- Total_data_PEV(loess.svd.dat)
+  data6 <- cbind(Type ="loess_svd", test6$PEV_sd)
   
-  test7 <- Total_data_PEV(svd.vsn.dat)
-  data7 <- cbind(Type ="svd_vsn", test7$PEV_sd)
+  test7 <- Total_data_PEV(rlr.knn.dat)
+  data7 <- cbind(Type ="rlr_knn", test7$PEV_sd)
   
-  test8 <- Total_data_PEV(svd.loess.dat)
-  data8 <- cbind(Type ="svd_loess", test8$PEV_sd)
+  test8 <- Total_data_PEV(rlr.lls.dat)
+  data8 <- cbind(Type ="rlr_lls", test8$PEV_sd)
   
-  test9 <- Total_data_PEV(svd.rlr.dat)
-  data9 <- cbind(Type ="svd_rlr", test9$PEV_sd)
+  test9 <- Total_data_PEV(rlr.svd.dat)
+  data9 <- cbind(Type ="rlr_svd", test9$PEV_sd)
   
   #Combining all the above results
   total_pev_overall_sd2 <- as.data.frame(plyr::rbind.fill(data1, data2, data3, data4, data5, data6, data7, data8, data9))
@@ -904,56 +903,56 @@ best_combination <- function (data_input, groups){
   }
   
   #PMAD calculation_groupwise
-  test1 <- Group_data_PMAD(knn.vsn.dat, sample)
-  knn_vsn_PMAD_mean <- cbind(Type ="knn_vsn", test1$Group_data_PMAD_mean)
-  knn_vsn_PMAD_median <- cbind(Type ="knn_vsn", test1$Group_data_PMAD_median)
-  knn_vsn_PMAD_sd <- cbind(Type ="knn_vsn", test1$Group_data_PMAD_sd)
+  test1 <- Group_data_PMAD(vsn.knn.dat, sample)
+  vsn_knn_PMAD_mean <- cbind(Type ="vsn_knn", test1$Group_data_PMAD_mean)
+  vsn_knn_PMAD_median <- cbind(Type ="vsn_knn", test1$Group_data_PMAD_median)
+  vsn_knn_PMAD_sd <- cbind(Type ="vsn_knn", test1$Group_data_PMAD_sd)
   
-  test2 <- Group_data_PMAD(knn.loess.dat, sample)
-  knn_loess_PMAD_mean <- cbind(Type ="knn_loess", test2$Group_data_PMAD_mean)
-  knn_loess_PMAD_median <- cbind(Type ="knn_loess", test2$Group_data_PMAD_median)
-  knn_loess_PMAD_sd <- cbind(Type ="knn_loess", test2$Group_data_PMAD_sd)
+  test2 <- Group_data_PMAD(vsn.lls.dat, sample)
+  vsn_lls_PMAD_mean <- cbind(Type ="vsn_lls", test2$Group_data_PMAD_mean)
+  vsn_lls_PMAD_median <- cbind(Type ="vsn_lls", test2$Group_data_PMAD_median)
+  vsn_lls_PMAD_sd <- cbind(Type ="vsn_lls", test2$Group_data_PMAD_sd)
   
-  test3 <- Group_data_PMAD(knn.rlr.dat, sample)
-  knn_rlr_PMAD_mean <- cbind(Type ="knn_rlr", test3$Group_data_PMAD_mean)
-  knn_rlr_PMAD_median <- cbind(Type ="knn_rlr", test3$Group_data_PMAD_median)
-  knn_rlr_PMAD_sd <- cbind(Type ="knn_rlr", test3$Group_data_PMAD_sd)
+  test3 <- Group_data_PMAD(vsn.svd.dat, sample)
+  vsn_svd_PMAD_mean <- cbind(Type ="vsn_svd", test3$Group_data_PMAD_mean)
+  vsn_svd_PMAD_median <- cbind(Type ="vsn_svd", test3$Group_data_PMAD_median)
+  vsn_svd_PMAD_sd <- cbind(Type ="vsn_svd", test3$Group_data_PMAD_sd)
   
-  test4 <- Group_data_PMAD(lls.vsn.dat, sample)
-  lls_vsn_PMAD_mean <- cbind(Type ="lls_vsn", test4$Group_data_PMAD_mean)
-  lls_vsn_PMAD_median <- cbind(Type ="lls_vsn", test4$Group_data_PMAD_median)
-  lls_vsn_PMAD_sd <- cbind(Type ="lls_vsn", test4$Group_data_PMAD_sd)
+  test4 <- Group_data_PMAD(loess.knn.dat, sample)
+  loess_knn_PMAD_mean <- cbind(Type ="loess_knn", test4$Group_data_PMAD_mean)
+  loess_knn_PMAD_median <- cbind(Type ="loess_knn", test4$Group_data_PMAD_median)
+  loess_knn_PMAD_sd <- cbind(Type ="loess_knn", test4$Group_data_PMAD_sd)
   
-  test5 <- Group_data_PMAD(lls.loess.dat, sample)
-  lls_loess_PMAD_mean <- cbind(Type ="lls_loess", test5$Group_data_PMAD_mean)
-  lls_loess_PMAD_median <- cbind(Type ="lls_loess", test5$Group_data_PMAD_median)
-  lls_loess_PMAD_sd <- cbind(Type ="lls_loess", test5$Group_data_PMAD_sd)
+  test5 <- Group_data_PMAD(loess.lls.dat, sample)
+  loess_lls_PMAD_mean <- cbind(Type ="loess_lls", test5$Group_data_PMAD_mean)
+  loess_lls_PMAD_median <- cbind(Type ="loess_lls", test5$Group_data_PMAD_median)
+  loess_lls_PMAD_sd <- cbind(Type ="loess_lls", test5$Group_data_PMAD_sd)
   
-  test6 <- Group_data_PMAD(lls.rlr.dat, sample)
-  lls_rlr_PMAD_mean <- cbind(Type ="lls_rlr", test6$Group_data_PMAD_mean)
-  lls_rlr_PMAD_median <- cbind(Type ="lls_rlr", test6$Group_data_PMAD_median)
-  lls_rlr_PMAD_sd <- cbind(Type ="lls_rlr", test6$Group_data_PMAD_sd)
+  test6 <- Group_data_PMAD(loess.svd.dat, sample)
+  loess_svd_PMAD_mean <- cbind(Type ="loess_svd", test6$Group_data_PMAD_mean)
+  loess_svd_PMAD_median <- cbind(Type ="loess_svd", test6$Group_data_PMAD_median)
+  loess_svd_PMAD_sd <- cbind(Type ="loess_svd", test6$Group_data_PMAD_sd)
   
-  test7 <- Group_data_PMAD(svd.vsn.dat, sample)
-  svd_vsn_PMAD_mean <- cbind(Type ="svd_vsn", test7$Group_data_PMAD_mean)
-  svd_vsn_PMAD_median <- cbind(Type ="svd_vsn", test7$Group_data_PMAD_median)
-  svd_vsn_PMAD_sd <- cbind(Type ="svd_vsn", test7$Group_data_PMAD_sd)
+  test7 <- Group_data_PMAD(rlr.knn.dat, sample)
+  rlr_knn_PMAD_mean <- cbind(Type ="rlr_knn", test7$Group_data_PMAD_mean)
+  rlr_knn_PMAD_median <- cbind(Type ="rlr_knn", test7$Group_data_PMAD_median)
+  rlr_knn_PMAD_sd <- cbind(Type ="rlr_knn", test7$Group_data_PMAD_sd)
   
-  test8 <- Group_data_PMAD(svd.loess.dat, sample)
-  svd_loess_PMAD_mean <- cbind(Type ="svd_loess", test8$Group_data_PMAD_mean)
-  svd_loess_PMAD_median <- cbind(Type ="svd_loess", test8$Group_data_PMAD_median)
-  svd_loess_PMAD_sd <- cbind(Type ="svd_loess", test8$Group_data_PMAD_sd)
+  test8 <- Group_data_PMAD(rlr.lls.dat, sample)
+  rlr_lls_PMAD_mean <- cbind(Type ="rlr_lls", test8$Group_data_PMAD_mean)
+  rlr_lls_PMAD_median <- cbind(Type ="rlr_lls", test8$Group_data_PMAD_median)
+  rlr_lls_PMAD_sd <- cbind(Type ="rlr_lls", test8$Group_data_PMAD_sd)
   
-  test9 <- Group_data_PMAD(svd.rlr.dat, sample)
-  svd_rlr_PMAD_mean <- cbind(Type ="svd_rlr", test9$Group_data_PMAD_mean)
-  svd_rlr_PMAD_median <- cbind(Type ="svd_rlr", test9$Group_data_PMAD_median)
-  svd_rlr_PMAD_sd <- cbind(Type ="svd_rlr", test9$Group_data_PMAD_sd)
+  test9 <- Group_data_PMAD(rlr.svd.dat, sample)
+  rlr_svd_PMAD_mean <- cbind(Type ="rlr_svd", test9$Group_data_PMAD_mean)
+  rlr_svd_PMAD_median <- cbind(Type ="rlr_svd", test9$Group_data_PMAD_median)
+  rlr_svd_PMAD_sd <- cbind(Type ="rlr_svd", test9$Group_data_PMAD_sd)
   
   ###PMAD_mean
   #Combining all the above results
-  total_pmad_mean <- plyr::rbind.fill(knn_vsn_PMAD_mean, knn_loess_PMAD_mean, knn_rlr_PMAD_mean, 
-                                      lls_vsn_PMAD_mean, lls_loess_PMAD_mean, lls_rlr_PMAD_mean, 
-                                      svd_vsn_PMAD_mean, svd_loess_PMAD_mean, svd_rlr_PMAD_mean)
+  total_pmad_mean <- plyr::rbind.fill(vsn_knn_PMAD_mean, vsn_lls_PMAD_mean, vsn_svd_PMAD_mean, 
+                                     loess_knn_PMAD_mean, loess_lls_PMAD_mean, loess_svd_PMAD_mean, 
+                                     rlr_knn_PMAD_mean, rlr_lls_PMAD_mean, rlr_svd_PMAD_mean)
   
   #Separating the results groupwise
   total_Group_data_PMAD_mean <- total_pmad_mean %>%
@@ -978,9 +977,9 @@ best_combination <- function (data_input, groups){
   
   ###PMAD_median
   #Combining all the above results
-  total_pmad_median <- plyr::rbind.fill(knn_vsn_PMAD_median, knn_loess_PMAD_median, knn_rlr_PMAD_median, 
-                                        lls_vsn_PMAD_median, lls_loess_PMAD_median, lls_rlr_PMAD_median, 
-                                        svd_vsn_PMAD_median, svd_loess_PMAD_median, svd_rlr_PMAD_median)
+  total_pmad_median <- plyr::rbind.fill(vsn_knn_PMAD_median, vsn_lls_PMAD_median, vsn_svd_PMAD_median, 
+                                      loess_knn_PMAD_median, loess_lls_PMAD_median, loess_svd_PMAD_median, 
+                                      rlr_knn_PMAD_median, rlr_lls_PMAD_median, rlr_svd_PMAD_median)
   
   #Separating the results groupwise
   total_Group_data_PMAD_median <- total_pmad_median %>%
@@ -1005,9 +1004,9 @@ best_combination <- function (data_input, groups){
   
   ###PMAD_sd
   #Combining all the above results
-  total_pmad_sd <- plyr::rbind.fill(knn_vsn_PMAD_sd, knn_loess_PMAD_sd, knn_rlr_PMAD_sd, 
-                                    lls_vsn_PMAD_sd, lls_loess_PMAD_sd, lls_rlr_PMAD_sd, 
-                                    svd_vsn_PMAD_sd, svd_loess_PMAD_sd, svd_rlr_PMAD_sd)
+  total_pmad_sd <- plyr::rbind.fill(vsn_knn_PMAD_sd, vsn_lls_PMAD_sd, vsn_svd_PMAD_sd, 
+                                      loess_knn_PMAD_sd, loess_lls_PMAD_sd, loess_svd_PMAD_sd, 
+                                      rlr_knn_PMAD_sd, rlr_lls_PMAD_sd, rlr_svd_PMAD_sd)
   
   #Separating the results groupwise
   total_Group_data_PMAD_sd <- total_pmad_sd %>%
@@ -1045,32 +1044,32 @@ best_combination <- function (data_input, groups){
   }
   
   #Overall PMAD_mean estimation
-  test1 <- Total_data_PMAD(knn.vsn.dat)
-  data1 <- cbind(Type ="knn_vsn", test1$PMAD_mean)
+  test1 <- Total_data_PMAD(vsn.knn.dat)
+  data1 <- cbind(Type ="vsn_knn", test1$PMAD_mean)
   
-  test2 <- Total_data_PMAD(knn.loess.dat)
-  data2 <- cbind(Type ="knn_loess", test2$PMAD_mean)
+  test2 <- Total_data_PMAD(vsn.lls.dat)
+  data2 <- cbind(Type ="vsn_lls", test2$PMAD_mean)
   
-  test3 <- Total_data_PMAD(knn.rlr.dat)
-  data3 <- cbind(Type ="knn_rlr", test3$PMAD_mean)
+  test3 <- Total_data_PMAD(vsn.svd.dat)
+  data3 <- cbind(Type ="vsn_svd", test3$PMAD_mean)
   
-  test4 <- Total_data_PMAD(lls.vsn.dat)
-  data4 <- cbind(Type ="lls_vsn", test4$PMAD_mean)
+  test4 <- Total_data_PMAD(loess.knn.dat)
+  data4 <- cbind(Type ="loess_knn", test4$PMAD_mean)
   
-  test5 <- Total_data_PMAD(lls.loess.dat)
-  data5 <- cbind(Type ="lls_loess", test5$PMAD_mean)
+  test5 <- Total_data_PMAD(loess.lls.dat)
+  data5 <- cbind(Type ="loess_lls", test5$PMAD_mean)
   
-  test6 <- Total_data_PMAD(lls.rlr.dat)
-  data6 <- cbind(Type ="lls_rlr", test6$PMAD_mean)
+  test6 <- Total_data_PMAD(loess.svd.dat)
+  data6 <- cbind(Type ="loess_svd", test6$PMAD_mean)
   
-  test7 <- Total_data_PMAD(svd.vsn.dat)
-  data7 <- cbind(Type ="svd_vsn", test7$PMAD_mean)
+  test7 <- Total_data_PMAD(rlr.knn.dat)
+  data7 <- cbind(Type ="rlr_knn", test7$PMAD_mean)
   
-  test8 <- Total_data_PMAD(svd.loess.dat)
-  data8 <- cbind(Type ="svd_loess", test8$PMAD_mean)
+  test8 <- Total_data_PMAD(rlr.lls.dat)
+  data8 <- cbind(Type ="rlr_lls", test8$PMAD_mean)
   
-  test9 <- Total_data_PMAD(svd.rlr.dat)
-  data9 <- cbind(Type ="svd_rlr", test9$PMAD_mean)
+  test9 <- Total_data_PMAD(rlr.svd.dat)
+  data9 <- cbind(Type ="rlr_svd", test9$PMAD_mean)
   
   
   #Combining all the above results
@@ -1082,32 +1081,32 @@ best_combination <- function (data_input, groups){
   colnames(total_pmad_overall_mean) <- original_cols
   
   #Overall PCV_median estimation
-  test1 <- Total_data_PMAD(knn.vsn.dat)
-  data1 <- cbind(Type ="knn_vsn", test1$PMAD_median)
+  test1 <- Total_data_PMAD(vsn.knn.dat)
+  data1 <- cbind(Type ="vsn_knn", test1$PMAD_median)
   
-  test2 <- Total_data_PMAD(knn.loess.dat)
-  data2 <- cbind(Type ="knn_loess", test2$PMAD_median)
+  test2 <- Total_data_PMAD(vsn.lls.dat)
+  data2 <- cbind(Type ="vsn_lls", test2$PMAD_median)
   
-  test3 <- Total_data_PMAD(knn.rlr.dat)
-  data3 <- cbind(Type ="knn_rlr", test3$PMAD_median)
+  test3 <- Total_data_PMAD(vsn.svd.dat)
+  data3 <- cbind(Type ="vsn_svd", test3$PMAD_median)
   
-  test4 <- Total_data_PMAD(lls.vsn.dat)
-  data4 <- cbind(Type ="lls_vsn", test4$PMAD_median)
+  test4 <- Total_data_PMAD(loess.knn.dat)
+  data4 <- cbind(Type ="loess_knn", test4$PMAD_median)
   
-  test5 <- Total_data_PMAD(lls.loess.dat)
-  data5 <- cbind(Type ="lls_loess", test5$PMAD_median)
+  test5 <- Total_data_PMAD(loess.lls.dat)
+  data5 <- cbind(Type ="loess_lls", test5$PMAD_median)
   
-  test6 <- Total_data_PMAD(lls.rlr.dat)
-  data6 <- cbind(Type ="lls_rlr", test6$PMAD_median)
+  test6 <- Total_data_PMAD(loess.svd.dat)
+  data6 <- cbind(Type ="loess_svd", test6$PMAD_median)
   
-  test7 <- Total_data_PMAD(svd.vsn.dat)
-  data7 <- cbind(Type ="svd_vsn", test7$PMAD_median)
+  test7 <- Total_data_PMAD(rlr.knn.dat)
+  data7 <- cbind(Type ="rlr_knn", test7$PMAD_median)
   
-  test8 <- Total_data_PMAD(svd.loess.dat)
-  data8 <- cbind(Type ="svd_loess", test8$PMAD_median)
+  test8 <- Total_data_PMAD(rlr.lls.dat)
+  data8 <- cbind(Type ="rlr_lls", test8$PMAD_median)
   
-  test9 <- Total_data_PMAD(svd.rlr.dat)
-  data9 <- cbind(Type ="svd_rlr", test9$PMAD_median)
+  test9 <- Total_data_PMAD(rlr.svd.dat)
+  data9 <- cbind(Type ="rlr_svd", test9$PMAD_median)
   
   #Combining all the above results
   total_pmad_overall_median2 <- as.data.frame(plyr::rbind.fill(data1, data2, data3, data4, data5, data6, data7, data8, data9))
@@ -1118,32 +1117,32 @@ best_combination <- function (data_input, groups){
   colnames(total_pmad_overall_median) <- original_cols
   
   #Overall PMAD_sd estimation
-  test1 <- Total_data_PMAD(knn.vsn.dat)
-  data1 <- cbind(Type ="knn_vsn", test1$PMAD_sd)
+  test1 <- Total_data_PMAD(vsn.knn.dat)
+  data1 <- cbind(Type ="vsn_knn", test1$PMAD_sd)
   
-  test2 <- Total_data_PMAD(knn.loess.dat)
-  data2 <- cbind(Type ="knn_loess", test2$PMAD_sd)
+  test2 <- Total_data_PMAD(vsn.lls.dat)
+  data2 <- cbind(Type ="vsn_lls", test2$PMAD_sd)
   
-  test3 <- Total_data_PMAD(knn.rlr.dat)
-  data3 <- cbind(Type ="knn_rlr", test3$PMAD_sd)
+  test3 <- Total_data_PMAD(vsn.svd.dat)
+  data3 <- cbind(Type ="vsn_svd", test3$PMAD_sd)
   
-  test4 <- Total_data_PMAD(lls.vsn.dat)
-  data4 <- cbind(Type ="lls_vsn", test4$PMAD_sd)
+  test4 <- Total_data_PMAD(loess.knn.dat)
+  data4 <- cbind(Type ="loess_knn", test4$PMAD_sd)
   
-  test5 <- Total_data_PMAD(lls.loess.dat)
-  data5 <- cbind(Type ="lls_loess", test5$PMAD_sd)
+  test5 <- Total_data_PMAD(loess.lls.dat)
+  data5 <- cbind(Type ="loess_lls", test5$PMAD_sd)
   
-  test6 <- Total_data_PMAD(lls.rlr.dat)
-  data6 <- cbind(Type ="lls_rlr", test6$PMAD_sd)
+  test6 <- Total_data_PMAD(loess.svd.dat)
+  data6 <- cbind(Type ="loess_svd", test6$PMAD_sd)
   
-  test7 <- Total_data_PMAD(svd.vsn.dat)
-  data7 <- cbind(Type ="svd_vsn", test7$PMAD_sd)
+  test7 <- Total_data_PMAD(rlr.knn.dat)
+  data7 <- cbind(Type ="rlr_knn", test7$PMAD_sd)
   
-  test8 <- Total_data_PMAD(svd.loess.dat)
-  data8 <- cbind(Type ="svd_loess", test8$PMAD_sd)
+  test8 <- Total_data_PMAD(rlr.lls.dat)
+  data8 <- cbind(Type ="rlr_lls", test8$PMAD_sd)
   
-  test9 <- Total_data_PMAD(svd.rlr.dat)
-  data9 <- cbind(Type ="svd_rlr", test9$PMAD_sd)
+  test9 <- Total_data_PMAD(rlr.svd.dat)
+  data9 <- cbind(Type ="rlr_svd", test9$PMAD_sd)
   
   #Combining all the above results
   total_pmad_overall_sd2 <- as.data.frame(plyr::rbind.fill(data1, data2, data3, data4, data5, data6, data7, data8, data9))
@@ -1178,9 +1177,9 @@ best_combination <- function (data_input, groups){
   Best_combinations <- cbind(PCV_best_combination, PEV_best_combination, PMAD_best_combination)
   
   #Adding names to table
-  Combinations <- c("knn_vsn", "knn_loess", "knn_rlr",
-                    "lls_vsn", "lls_loess", "lls_rlr",
-                    "svd_vsn", "svd_loess", "svd_rlr")
+  Combinations <- c("vsn_knn", "vsn_lls", "vsn_svd",
+                    "loess_knn", "loess_lls", "loess_svd",
+                    "rlr_knn", "rlr_lls", "rlr_svd")
   #Extracting PCV values for all combinations
   pcv_group_mean <- total_Group_data_PCV_mean
   pcv_group_median <- total_Group_data_PCV_median
@@ -1231,11 +1230,9 @@ best_combination <- function (data_input, groups){
   
   result_list <- list("Best combinations" = as.data.frame(Best_combinations), "PCV Result" = PCV_table, "PEV Result" = PEV_table, "PMAD Result" =PMAD_table,
                       "vsn_data" = cbind(com_data_ID, vsn.dat), "loess_data" = cbind(com_data_ID, loess.dat), "rlr_data" = cbind(com_data_ID, rlr.dat),
-                      "knn_vsn_data" = cbind(com_data_ID,knn.vsn.dat),  "knn_loess_data" = cbind(com_data_ID,knn.loess.dat),
-                      "knn_rlr_data" = cbind(com_data_ID,knn.rlr.dat), "lls_vsn_data" = cbind(com_data_ID, as.data.frame(lls.vsn.dat)),
-                      "lls_loess_data" =  cbind(com_data_ID, as.data.frame(lls.loess.dat)), "lls_rlr_data" = cbind(com_data_ID, as.data.frame(lls.rlr.dat)),
-                      "svd_vsn_data" =  cbind(com_data_ID, as.data.frame(svd.vsn.dat)), "svd_loess_data" =  cbind(com_data_ID, as.data.frame(svd.loess.dat)),
-                      "svd_rlr_data" =  cbind(com_data_ID, as.data.frame(svd.rlr.dat)))
+                      "vsn_knn_data" = cbind(com_data_ID,vsn.knn.dat),  "vsn_lls_data" = cbind(com_data_ID,vsn.lls.dat),"vsn_svd_data" = cbind(com_data_ID,vsn.svd.dat),
+                      "loess_knn_data" = cbind(com_data_ID, as.data.frame(loess.knn.dat)), "loess_lls_data" =  cbind(com_data_ID, as.data.frame(loess.lls.dat)), "loess_svd_data" = cbind(com_data_ID, as.data.frame(loess.svd.dat)),
+                      "rlr_knn_data" =  cbind(com_data_ID, as.data.frame(rlr.knn.dat)), "rlr_lls_data" =  cbind(com_data_ID, as.data.frame(rlr.lls.dat)),"rlr_svd_data" =  cbind(com_data_ID, as.data.frame(rlr.svd.dat)))
   sink()
   return (result_list)
 }

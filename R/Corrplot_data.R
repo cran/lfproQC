@@ -10,7 +10,7 @@
 #' @export
 #'
 #' @examples Corrplot_data(yeast_data)
-#' @examples Corrplot_data(knn_rlr_yeast_data)
+#' @examples Corrplot_data(rlr_knn_yeast_data)
 Corrplot_data <- function(data){
   x <- data[,-1]
   y <- as.matrix(x)

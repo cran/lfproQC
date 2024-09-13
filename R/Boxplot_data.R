@@ -16,7 +16,7 @@
 #' @export
 #'
 #' @examples Boxplot_data(yeast_data)
-#' @examples Boxplot_data(knn_rlr_yeast_data)
+#' @examples Boxplot_data(rlr_knn_yeast_data)
 Boxplot_data <- function (data){
   variable <- value <- NULL
 

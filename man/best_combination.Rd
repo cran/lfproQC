@@ -32,31 +32,31 @@ for the given dataset.
 
 `rlr_data` The `rlr` normalized dataset
 
-`knn_vsn_data` The dataset normalized by `vsn` method and missing values imputed
+`vsn_knn_data` The dataset normalized by `vsn` method and missing values imputed
              by `knn` method.
-
-`knn_loess_data` The dataset normalized by `loess` method and missing values imputed
-             by `knn` method.
-
-`knn_rlr_data` The dataset normalized by `rlr` method and missing values imputed
-             by `knn` method.
-
-`lls_vsn_data` The dataset normalized by `vsn` method and missing values imputed
+             
+`vsn_lls_data` The dataset normalized by `vsn` method and missing values imputed
              by `lls` method.
-
-`lls_loess_data` The dataset normalized by `loess` method and missing values imputed
-             by `lls` method.
-
-`lls_rlr_data` The dataset normalized by `rlr` method and missing values imputed
-             by `lls` method.
-
-`svd_vsn_data` The dataset normalized by `vsn` method and missing values imputed
+             
+`vsn_svd_data` The dataset normalized by `vsn` method and missing values imputed
              by `svd` method.
 
-`svd_loess_data` The dataset normalized by `loess` method and missing values imputed
-             by `svd` method.
+`loess_knn_data` The dataset normalized by `loess` method and missing values imputed
+             by `knn` method.
 
-`svd_rlr_data` The dataset normalized by `rlr` method and missing values imputed
+`loess_lls_data` The dataset normalized by `loess` method and missing values imputed
+             by `lls` method.
+             
+`loess_svd_data` The dataset normalized by `loess` method and missing values imputed
+             by `svd` method.
+             
+`rlr_knn_data` The dataset normalized by `rlr` method and missing values imputed
+             by `knn` method.
+
+`rlr_lls_data` The dataset normalized by `rlr` method and missing values imputed
+             by `lls` method.
+
+`rlr_svd_data` The dataset normalized by `rlr` method and missing values imputed
              by `svd` method.
 }
 \description{
@@ -80,7 +80,7 @@ result <- best_combination(yeast_data, yeast_groups)
 result$`Best combinations`
 result$`PCV Result`
 result$`PMAD Result`
-result$`knn_rlr_data`
+result$`rlr_knn_data`
 }
 }
 \author{

@@ -16,7 +16,7 @@
 #' @export
 #'
 #' @examples Densityplot_data(yeast_data)
-#' @examples Densityplot_data(knn_rlr_yeast_data)
+#' @examples Densityplot_data(rlr_knn_yeast_data)
 Densityplot_data <- function (data){
 
   new_data <- as.data.frame(data)

@@ -11,7 +11,7 @@
 #' @return Interactive column-wise QQ-plot
 #' @export
 #'
-#' @examples qqplot <- QQplot_data(knn_rlr_yeast_data)
+#' @examples qqplot <- QQplot_data(rlr_knn_yeast_data)
 QQplot_data <- function(data) {
   Observed <- stats::rnorm(nrow(data))
   new_dat <- cbind(Observed, data[, -1])

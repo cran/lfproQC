@@ -1,10 +1,10 @@
-b493994bbb3e3065baf17fa13f075f6e *DESCRIPTION
+1737b9be30003209bd0b65781b158b79 *DESCRIPTION
 f02b0b07727b5e0b96b0329d8e11967d *NAMESPACE
-589db0099b47990780fadeea80d5a856 *NEWS
+4df3ba078ffe368cc4127386e2933b4c *NEWS
 98fee1b5ec8afac78202ec3d06d3e870 *R/Boxplot_data.R
 20093f93e98a4f7969f1a6147056f5d1 *R/Corrplot_data.R
 4a93b9eec418e33230f4ab941cf3b00a *R/Densityplot_data.R
-e1aa4bdc6735ad4de98423eeb02afd07 *R/MAplot_DE_fn.R
+c0c200db505da5383872590423570d66 *R/MAplot_DE_fn.R
 7911b7645f8d170e616012f4a5e8fc2b *R/MDSplot_data.R
 c191cff67c8ed2debb09bb2e8e46a917 *R/QQplot_data.R
 e3f93d38aef3debca8bdea660fdef783 *R/best_combination.R
@@ -13,7 +13,7 @@ e6c79185da988a2215e7ac5d924565dc *R/lfproQC-package.R
 69f593311ca3997678478348ee87bc85 *R/reexports.R
 9060914a7b6f664719fbc2dfd14d7961 *R/rlr_knn_yeast_data.R
 ce0b746de3ae435d1277bc94600b3b95 *R/top_table_fn.R
-b9d6ce12415a786ff804b619bb2e5e08 *R/volcanoplot_DE_fn.R
+76e69bc0059c4d0e248871c91146c87d *R/volcanoplot_DE_fn.R
 74c7152d5cbf5c9da05ad0b3112cc59f *R/yeast_data.R
 74cd0c5f058468acd349e0f807248cff *R/yeast_groups.R
 987cda4752c6ee298ff353e7b49e604e *R/yeast_top_table.R
@@ -26,7 +26,7 @@ eefec1e3372fae8d08ff32115f1b653b *data/yeast_groups.rda
 dce8f6c116b1f2c68e4417671922d61a *data/yeast_top_table.rda
 9cd3a6a3bdfe16f2d4111a4ab0fe9f04 *inst/doc/user_guide.R
 6b5dcec5437fa5485a29974f24c92b18 *inst/doc/user_guide.Rmd
-eeda8478e34f2507cfa2a8ad113eb571 *inst/doc/user_guide.html
+d29c0161c9a8294f5db45386c9b526a8 *inst/doc/user_guide.html
 d9fc08f2c25a133e31138f0cd519ad73 *man/Boxplot_data.Rd
 f29d2f37acef74fceef9d6b851161c85 *man/Corrplot_data.Rd
 b096b672c87af4099843717879c74b6b *man/Densityplot_data.Rd
@@ -34,7 +34,7 @@ b096b672c87af4099843717879c74b6b *man/Densityplot_data.Rd
 efddc856f36a8d9fea44f1ce6f9ad93e *man/MDSplot_data.Rd
 810654b42dec47965a908c97ed64f9c4 *man/QQplot_data.Rd
 b872ba79a01f9ca5b2bdbae83d14d61c *man/best_combination.Rd
-1323ef5b9b29cbde3c1ce7fd8bc06826 *man/lfproQC-package.Rd
+3843adc8147211d74526bb921464d651 *man/lfproQC-package.Rd
 6f62fce0a4b0cebd551b892a0ffc08b3 *man/reexports.Rd
 c76282c58769a48d07cd19bd36c855d2 *man/rlr_knn_yeast_data.Rd
 ab68312472558ba279783e068e3303b2 *man/top_table_fn.Rd

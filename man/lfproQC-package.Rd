@@ -6,14 +6,14 @@
 \alias{lfproQC-package}
 \title{lfproQC: Quality Control for Label-Free Proteomics Expression Data}
 \description{
-Label-free bottom-up proteomics expression data is often affected by data heterogeneity and missing values. Normalization and missing value imputation are commonly used techniques to address these issues and make the dataset suitable for further downstream analysis. This package provides an optimal combination of normalization and imputation methods for the dataset. The package utilizes three normalization methods and three imputation methods.The statistical evaluation measures named pooled co-efficient of variance, pooled estimate of variance and pooled median absolute deviation are used for selecting the best combination of normalization and imputation method for the given dataset. The user can also visualize the results by using various plots available in this package. The user can also perform the differential expression analysis between two sample groups with the function included in this package. The chosen three normalization methods, three imputation methods and three evaluation measures were chosen for this study based on the research papers published by Välikangas et al. (2016) \doi{10.1093/bib/bbw095}, Jin et al. (2021) \doi{10.1038/s41598-021-81279-4} and Srivastava et al. (2023) \doi{10.2174/1574893618666230223150253}.
+Label-free bottom-up proteomics expression data is often affected by data heterogeneity and missing values. Normalization and missing value imputation are commonly used techniques to address these issues and make the dataset suitable for further downstream analysis. This package provides an optimal combination of normalization and imputation methods for the dataset. The package utilizes three normalization methods and three imputation methods.The statistical evaluation measures named pooled co-efficient of variance, pooled estimate of variance and pooled median absolute deviation are used for selecting the best combination of normalization and imputation method for the given dataset. The user can also visualize the results by using various plots available in this package. The user can also perform the differential expression analysis between two sample groups with the function included in this package. The chosen three normalization methods, three imputation methods and three evaluation measures were chosen for this study based on the research papers published by Välikangas et al. (2016) \doi{10.1093/bib/bbw095}, Jin et al. (2021) \doi{10.1038/s41598-021-81279-4} and Srivastava et al. (2023) \doi{10.2174/1574893618666230223150253}.This work has published by Sakthivel et al. (2025) \doi{10.1021/acs.jproteome.4c00552}.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/kabilansbio/lfproQC}
   \item \url{https://dabiniasri.shinyapps.io/lfproQC}
-  \item \url{http://omics.icar.gov.in/lfproQC}
+  \item \doi{10.1021/acs.jproteome.4c00552}
   \item Report bugs at \url{https://github.com/kabilansbio/lfproQC/issues}
 }
 

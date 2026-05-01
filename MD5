@@ -1,6 +1,6 @@
-a9b0721f258a3e19dc39f65cda47bb2b *DESCRIPTION
+70e6d5474e084391f8b424b59a346c9e *DESCRIPTION
 f02b0b07727b5e0b96b0329d8e11967d *NAMESPACE
-958f22c93d8c55647ac9dc464fa1f2af *NEWS
+ba93d650a3e89657df463ff824f7aa27 *NEWS
 670480d7aae5d34a03e59b250c764390 *R/Boxplot_data.R
 20093f93e98a4f7969f1a6147056f5d1 *R/Corrplot_data.R
 d9e871055d9ba591c4c9e97b1876b61b *R/Densityplot_data.R
@@ -24,10 +24,10 @@ cb3b20077bebc5da31fc1b46c657c0ff *build/partial.rdb
 31a86372356fae0f26d80c1b2449d678 *data/yeast_data.rda
 eefec1e3372fae8d08ff32115f1b653b *data/yeast_groups.rda
 dce8f6c116b1f2c68e4417671922d61a *data/yeast_top_table.rda
-048c75dbfee29f1d30fed045a8a42b85 *inst/CITATION
+b12240e08c297b731a96fd71b6c97c83 *inst/CITATION
 9cd3a6a3bdfe16f2d4111a4ab0fe9f04 *inst/doc/user_guide.R
 6b5dcec5437fa5485a29974f24c92b18 *inst/doc/user_guide.Rmd
-51904de30a2961f6bdfa2636b25c2523 *inst/doc/user_guide.html
+1c9a88fa16989e7de4ee1f0cbfb851ee *inst/doc/user_guide.html
 d9fc08f2c25a133e31138f0cd519ad73 *man/Boxplot_data.Rd
 f29d2f37acef74fceef9d6b851161c85 *man/Corrplot_data.Rd
 b096b672c87af4099843717879c74b6b *man/Densityplot_data.Rd
@@ -35,7 +35,7 @@ b096b672c87af4099843717879c74b6b *man/Densityplot_data.Rd
 efddc856f36a8d9fea44f1ce6f9ad93e *man/MDSplot_data.Rd
 810654b42dec47965a908c97ed64f9c4 *man/QQplot_data.Rd
 e919a520c820a873c4fbaa364d0ab97b *man/best_combination.Rd
-c35b9cdc4e18e4253eee16cc6e61f0c1 *man/lfproQC-package.Rd
+7b555ad1c1cdfd7631a8839cf9cd8d74 *man/lfproQC-package.Rd
 6f62fce0a4b0cebd551b892a0ffc08b3 *man/reexports.Rd
 c76282c58769a48d07cd19bd36c855d2 *man/rlr_knn_yeast_data.Rd
 ab68312472558ba279783e068e3303b2 *man/top_table_fn.Rd
